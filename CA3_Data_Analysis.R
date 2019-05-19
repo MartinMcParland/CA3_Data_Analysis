@@ -81,7 +81,21 @@ plotmeans(unemployment_rate ~ Year, data = unemployment_and_deaths,
 
 install.packages("pwr")
 library(pwr)
+power_information <- pwr.t.test(power = 0.90, 
+                                sig.level = 0.05,
+                                n = 48,
+                                type = "two.sample",
+                                alternative = "two.sided")
+power_information
+plot(power_information)
+# Results suggest an effect size of 0.66 so, based on the 
+# conventional effect size settings for tests for means (t), 
+# the effect size selected for this sample is large (0.8).
 
+# The power calculation is re-run based on a 90% certainty, 
+# with an effect size of 0.8 and no more than 5% significance level 
+# this will confirm if the sample size of 48 is greater than the
+# optimal sample size
 power_information <- pwr.t.test(power = 0.90, 
                                 sig.level = 0.05,
                                 d = 0.8,
@@ -125,4 +139,4 @@ res_spearman
 # +1 indicates a strong positive correlation 
 # The results of the Spearman's test produces a correlation coefficient of -0.14
 # This indicates that there is only a weak correlation between unemployment rate
-# and death rate
+# and death rate.
